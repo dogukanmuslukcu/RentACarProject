@@ -1,4 +1,8 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities;
+using Core.Utilities.Abstract;
+using Core.Utilities.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -9,39 +13,55 @@ namespace Business.Concrete
 {
     public class ColorManager : IColorService
     {
-        IColorDal _colorService;
+        IColorDal _colorDal;
 
         public ColorManager(IColorDal colorService)
         {
-            _colorService = colorService;
+            _colorDal = colorService;
         }
 
-        public void Add(Color color)
+        public IResult Add(Color color)
         {
-            _colorService.Add(color);
-            Console.WriteLine("Renk eklenmiştir.");
+            if (color.ColorName.Length >= 2)
+            {
+                _colorDal.Add(color);
+                return new SuccessResult(Messages.SuccessMessage);
+            }
+            else
+            {
+                return new ErrorResult(Messages.ErrorMessage);
+            }
+
         }
 
-        public void Delete(Color color)
+        public IResult Delete(Color color)
         {
-            _colorService.Delete(color);
-            Console.WriteLine("Renk silinmiştir");
+            _colorDal.Delete(color);
+            return new SuccessResult(Messages.SuccessMessage);
         }
 
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorService.GetAll();
+            if (DateTime.Now.Hour >= 20)
+            {
+                return new ErrorDataResult<List<Color>>(Messages.ErrorDataMessage);
+            }
+            else
+            {
+                return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.SuccessDataMessage);
+
+            }
         }
 
-        public Color GetByID(int id)
+        public IDataResult<Color> GetByID(int id)
         {
-            return _colorService.Get(c => c.ColorID == id);
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorID == id), Messages.SuccessDataMessage);
         }
 
-        public void Update(Color color)
+        public IResult Update(Color color)
         {
-            _colorService.Update(color);
-            Console.WriteLine("Renk güncellendi.");
+            _colorDal.Update(color);
+            return new ErrorResult(Messages.ErrorMessage);
 
         }
     }
