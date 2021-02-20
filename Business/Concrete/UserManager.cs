@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation.FluentValidation;
 using Core.Utilities;
 using Core.Utilities.Abstract;
 using Core.Utilities.Concrete;
@@ -22,6 +24,7 @@ namespace Business.Concrete
 
         public IResult Add(User user)
         {
+            ValidationTool.Validate(new UserValidation(), user);
             _userDal.Add(user);
             return new SuccessResult(Messages.SuccessMessage);
         }

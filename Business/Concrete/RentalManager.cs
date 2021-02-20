@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation.FluentValidation;
 using Core.Utilities;
 using Core.Utilities.Abstract;
 using Core.Utilities.Concrete;
@@ -22,7 +24,7 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            _rentalDal.Add(rental);
+            ValidationTool.Validate(new RentalValidation(), rental);
             return new SuccessResult(Messages.SuccessMessage);
         }
 

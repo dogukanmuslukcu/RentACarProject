@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.CrossCuttingConcerns.Validation.FluentValidation;
 using Core.Utilities;
 using Core.Utilities.Abstract;
 using Core.Utilities.Concrete;
@@ -23,16 +25,10 @@ namespace Business.Concrete
 
         public IResult Add(Car car)
         {
-            if (car.Description.Length >= 2 && car.DailyPrice > 0)
-            {
-                _carDal.Add(car);
+            ValidationTool.Validate(new CarValidation(), car);
+            _carDal.Add(car);
                 return new SuccessResult(Messages.SuccessMessage);
-            }
-            else
-            {
-                return new ErrorResult(Messages.ErrorMessage);
-
-            }
+           
         }
 
         public IResult Delete(Car car)
