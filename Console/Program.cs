@@ -23,7 +23,7 @@ namespace ConsoleUI
             // ColorManagerTest(colorManager);
             // BrandManagerTest(brandManager);
           // CarManagerTest(carManager);
-             var result = carManager.Delete(new Car { CarID = 10089 });
+             var result = carManager.Delete(new Car { CarId = 10089 });
             Console.WriteLine( result.Message ); 
         }
 
@@ -36,7 +36,7 @@ namespace ConsoleUI
                 foreach (var item in result.Data)
 
                 {
-                    Console.WriteLine(item.CarID + "  " + item.BrandName + "  " + item.ColorName + "  " + item.DailyPrice);
+                    Console.WriteLine(item.CarId + "  " + item.BrandName + "  " + item.ColorName + "  " + item.DailyPrice);
                 }
             }
             else
@@ -94,7 +94,7 @@ namespace ConsoleUI
                 foreach (var car in result.Data)
 
                 {
-                    Console.WriteLine(car.ModelYear+"//"+car.CarID);
+                    Console.WriteLine(car.ModelYear+"//"+car.CarId);
 
                 }
             }
