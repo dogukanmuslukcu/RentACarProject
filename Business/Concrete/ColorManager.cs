@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation.FluentValidation;
 using Core.Utilities;
 using Core.Utilities.Abstract;
@@ -21,10 +22,10 @@ namespace Business.Concrete
         {
             _colorDal = colorService;
         }
-
+        [ValidationAspect(typeof(ColorValidatior))]
         public IResult Add(Color color)
         {
-            ValidationTool.Validate(new ColorValidation(), color);
+           
             _colorDal.Add(color);
                 return new SuccessResult(Messages.SuccessMessage);
             

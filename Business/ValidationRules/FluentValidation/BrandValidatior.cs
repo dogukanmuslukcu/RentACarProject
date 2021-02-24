@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Business.ValidationRules.FluentValidation
 {
-  public class BrandValidation : AbstractValidator<Brand>
+  public class BrandValidatior : AbstractValidator<Brand>
     {
-        public BrandValidation()
+        public BrandValidatior()
         {
             RuleFor(b => b.BrandName.Length).GreaterThanOrEqualTo(3);
         }
