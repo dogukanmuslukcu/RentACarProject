@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Business.ValidationRules.FluentValidation
 {
-  public  class ColorValidatior : AbstractValidator<Color>
+  public  class ColorValidator : AbstractValidator<Color>
     {
-        public ColorValidatior()
+        public ColorValidator()
         {
             RuleFor(cl => cl.ColorName.Length).GreaterThanOrEqualTo(3);
         }

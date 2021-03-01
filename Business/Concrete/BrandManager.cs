@@ -23,21 +23,23 @@ namespace Business.Concrete
         {
             _brandDal = brandDal;
         }
-        [ValidationAspect(typeof(BrandValidatior))]
+
+
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Add(Brand brand)
         {
-           
                 _brandDal.Add(brand);
                 return new SuccessResult(Messages.SuccessMessage);
-            
         }
 
-
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
             return new SuccessResult(Messages.SuccessMessage);
         }
+
+        [ValidationAspect(typeof(BrandValidator))]
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
@@ -49,6 +51,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(),Messages.SuccessDataMessage);
         }
+
 
         public IDataResult<Brand> GetByID(int brandID)
         {

@@ -6,9 +6,9 @@ using System.Text;
 
 namespace Business.ValidationRules.FluentValidation
 {
-  public  class CarValidatior : AbstractValidator<Car>
+  public  class CarValidator : AbstractValidator<Car>
     {
-        public CarValidatior()
+        public CarValidator()
         {
             RuleFor(c => c.Description.Length).GreaterThanOrEqualTo(3);
             RuleFor(c => c.ModelYear).GreaterThanOrEqualTo(4);

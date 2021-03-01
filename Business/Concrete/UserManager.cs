@@ -22,7 +22,8 @@ namespace Business.Concrete
         {
             _userDal = userDal;
         }
-        [ValidationAspect(typeof(UserValidatior))]
+
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Add(User user)
         {
           
@@ -30,6 +31,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.SuccessMessage);
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Delete(User user)
         {
             _userDal.Delete(user);
@@ -46,6 +48,7 @@ namespace Business.Concrete
             return new SuccessDataResult<User>(_userDal.Get(u=>u.UserId==userID),Messages.SuccessDataMessage);
         }
 
+        [ValidationAspect(typeof(UserValidator))]
         public IResult Update(User user)
         {
             _userDal.Update(user);

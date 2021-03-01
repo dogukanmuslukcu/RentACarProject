@@ -22,7 +22,9 @@ namespace Business.Concrete
         {
             _customerDal = customerDal;
         }
-        [ValidationAspect(typeof(CustomerValidatior))]
+
+
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Add(Customer customer)
         {
           
@@ -30,6 +32,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.SuccessMessage);
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Delete(Customer customer)
         {
             _customerDal.Delete(customer);
@@ -46,6 +49,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Customer>(_customerDal.Get(c => c.CustomerId == customerID),Messages.SuccessDataMessage);
         }
 
+        [ValidationAspect(typeof(CustomerValidator))]
         public IResult Update(Customer customer)
         {
             _customerDal.Update(customer);

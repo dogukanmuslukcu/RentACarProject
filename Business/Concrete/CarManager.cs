@@ -23,7 +23,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-       [ValidationAspect(typeof(CarValidatior))]
+       [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
            
@@ -32,12 +32,15 @@ namespace Business.Concrete
            
         }
 
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
             return new SuccessResult(Messages.SuccessMessage);
 
         }
+
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
             _carDal.Update(car);

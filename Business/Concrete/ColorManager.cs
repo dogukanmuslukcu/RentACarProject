@@ -22,7 +22,7 @@ namespace Business.Concrete
         {
             _colorDal = colorService;
         }
-        [ValidationAspect(typeof(ColorValidatior))]
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Add(Color color)
         {
            
@@ -32,11 +32,13 @@ namespace Business.Concrete
 
         }
 
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
             return new SuccessResult(Messages.SuccessMessage);
         }
+
 
         public IDataResult<List<Color>> GetAll()
         {
@@ -55,7 +57,7 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == colorID), Messages.SuccessDataMessage);
         }
-
+        [ValidationAspect(typeof(ColorValidator))]
         public IResult Update(Color color)
         {
             _colorDal.Update(color);
