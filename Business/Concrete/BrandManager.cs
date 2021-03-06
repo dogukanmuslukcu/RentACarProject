@@ -32,14 +32,14 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.SuccessMessage);
         }
 
-        [ValidationAspect(typeof(BrandValidator))]
+       
         public IResult Delete(Brand brand)
         {
             _brandDal.Delete(brand);
             return new SuccessResult(Messages.SuccessMessage);
         }
 
-        [ValidationAspect(typeof(BrandValidator))]
+        
         public IResult Update(Brand brand)
         {
             _brandDal.Update(brand);
