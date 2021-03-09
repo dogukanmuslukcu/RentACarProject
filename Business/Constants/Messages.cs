@@ -2,6 +2,7 @@
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -21,5 +22,6 @@ namespace Business.Constants
         public static string UserAlreadyExists = "Kullanıcı hali hazırda bulunmakta.";
         public static string userRegistered = "Kullanıcı başarıyla kaydedildi.";
         public static string AccessTokenCreated = "Token oluşturuldu.";
+        public static string AuthorizationDenied = "Yetkiniz yok.";
     }
 }
