@@ -27,7 +27,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        [PerformanceAspect(5)]
+        
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("IProduct.Service.Get")]
         public IResult Add(Car car)
@@ -37,7 +37,7 @@ namespace Business.Concrete
                 return new SuccessResult(Messages.SuccessMessage);
            
         }
-        [PerformanceAspect(5)]
+        
         [ValidationAspect(typeof(CarValidator))]
         public IResult Delete(Car car)
         {
@@ -45,7 +45,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.SuccessMessage);
 
         }
-        [PerformanceAspect(5)]
+        
         [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("IProduct.Service.Get")]
         public IResult Update(Car car)
@@ -54,7 +54,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.SuccessMessage);
 
         }
-        [PerformanceAspect(5)]
+       
         [CacheAspect]
         [SecuredOperation("Product.List")]
         public IDataResult<List<Car>> GetAll()
