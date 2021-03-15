@@ -56,7 +56,7 @@ namespace Business.Concrete
         }
        
         [CacheAspect]
-        [SecuredOperation("Product.List")]
+       // [SecuredOperation("Product.List")]
         public IDataResult<List<Car>> GetAll()
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.SuccessDataMessage);
