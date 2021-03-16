@@ -1,6 +1,7 @@
 ﻿using Core.Utilities;
 using Core.Utilities.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,6 @@ namespace Business.Abstract
         IResult Delete(Rental rental);
         IDataResult<List<Rental>> GetAll();
         IDataResult<Rental> GetByID(int rentID);
+        IDataResult<List<RentalDetailsDto>> GetRentalDetails();
     }
 }

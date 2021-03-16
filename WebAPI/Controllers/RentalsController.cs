@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -25,6 +26,7 @@ namespace WebAPI.Controllers
 
         public IActionResult GetAll()
         {
+           
             var result = _rentalService.GetAll();
             if (result.Success)
             {
@@ -84,6 +86,22 @@ namespace WebAPI.Controllers
         public IActionResult GetById(int id)
         {
             var result = _rentalService.GetByID(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+        [HttpGet("getrentaldetails")]
+
+        public IActionResult GetCarDetails()
+        {
+            
+            var result = _rentalService.GetRentalDetails();
             if (result.Success)
             {
                 return Ok(result);

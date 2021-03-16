@@ -42,15 +42,9 @@ namespace Business.Concrete
 
         public IDataResult<List<Color>> GetAll()
         {
-            if (DateTime.Now.Hour >= 20)
-            {
-                return new ErrorDataResult<List<Color>>(Messages.ErrorDataMessage);
-            }
-            else
-            {
+            
                 return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.SuccessDataMessage);
 
-            }
         }
 
         public IDataResult<Color> GetByID(int colorID)
