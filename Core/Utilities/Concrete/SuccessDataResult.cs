@@ -10,7 +10,7 @@ namespace Core.Utilities.Concrete
         {
 
         }
-        public SuccessDataResult(T data):base(data, true)
+        public SuccessDataResult( T data):base(data, true)
         {
 
         }
