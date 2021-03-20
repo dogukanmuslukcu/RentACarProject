@@ -22,10 +22,12 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
+      
         
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal   )
         {
             _carDal = carDal;
+           
         }
 
         
@@ -85,14 +87,13 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailsDto>> GetAllColorId(int colorId)
         {
-            
-            
+           
             return new SuccessDataResult<List<CarDetailsDto>>( _carDal.GetCarDetails(c=>c.ColorId==colorId),Messages.SuccessDataMessage);
         }
 
         public IDataResult<List<CarDetailsDto>> GetAllBrandId(int brandId)
         {
-            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId), Messages.SuccessDataMessage);
+            return new SuccessDataResult<List<CarDetailsDto>>(_carDal.GetCarDetails(b=>b.BrandId==brandId),Messages.SuccessDataMessage);
         }
     }
 }
