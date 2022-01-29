@@ -56,24 +56,21 @@ namespace Business.Concrete
             public IResult Add(IFormFile image, CarImage carImage)
             {
 
-                var imageCount = _carImageDal.GetAll(c => c.CarId == carImage.CarId).Count;
-
-                if (imageCount >= 5)
-                {
-                    return new ErrorResult("One car must have 5 or less images");
-                }
-
-                var imageResult = FileUpload.Upload(image);
-
-                if (!imageResult.Success)
-                {
-                    return new ErrorResult(imageResult.Message);
-                }
-                carImage.ImagePath = imageResult.Message;
-              carImage.Date = DateTime.Now;
-                _carImageDal.Add(carImage);
-                return new SuccessResult("Car image added");
+            var imageCount = _carImageDal.GetAll(c => c.CarId == carImage.CarId).Count;
+            if (imageCount >= 5)
+            {
+                return new ErrorResult("One car must have 5 or less images");
             }
+            var imageResult = FileUpload.Upload(image);
+
+            if (!imageResult.Success)
+            {
+                return new ErrorResult(imageResult.Message);
+            }
+            carImage.ImagePath = imageResult.Message;
+            _carImageDal.Add(carImage);
+            return new SuccessResult("Car image added");
+        }
 
             public IResult Delete(CarImage carImage)
             {
