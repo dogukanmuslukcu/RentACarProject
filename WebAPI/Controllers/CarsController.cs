@@ -136,7 +136,21 @@ namespace WebAPI.Controllers
                 return BadRequest(result);
             }
         }
-       
+
+
+        [HttpGet("getbyidfordto")]
+        public IActionResult GetByIdForDto(int id)
+        {
+            var result = _carService.GetByIdForDto(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
 
     }
 }

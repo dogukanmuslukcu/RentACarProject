@@ -16,7 +16,7 @@ namespace Business.ValidationRules.FluentValidation
             RuleFor(ct => ct.CompanyName).NotEmpty();
             RuleFor(ct => ct.Password).NotEmpty();
             RuleFor(ct => ct.Password.Length).GreaterThanOrEqualTo(8);
-            RuleFor(ct => ct.Email).Must(ContainSpecificCharacter1).WithMessage("email adresi @ içermelidir.");
+            RuleFor(ct => ct.Email).Must(ContainSpecificEmailCharacter).WithMessage("email adresi @ içermelidir.");
             RuleFor(ct => ct.Password).Must(ContainSpecificCharacters).WithMessage("şifreniz en az bir rakam veyahut ( ? & @ # ) dan birini içermelidir.");
         }
 
@@ -42,7 +42,7 @@ namespace Business.ValidationRules.FluentValidation
             }
         }
 
-        private bool ContainSpecificCharacter1(string arg)
+        private bool ContainSpecificEmailCharacter(string arg)
         {
             return arg.Contains("@");
         }
