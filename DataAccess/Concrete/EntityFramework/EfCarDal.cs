@@ -49,5 +49,42 @@ namespace DataAccess.Concrete.EntityFramework
             } 
         }
 
+        public List<CarImageDto> GetCarImageDetails(Expression<Func<Car, bool>> filter = null)
+        {
+            using (ReCapProjectDBContext context = new ReCapProjectDBContext()) 
+            {
+                var resultList = from c in filter == null ? context.Cars : context.Cars.Where(filter)
+                                 join b in context.Brands
+                                 on c.BrandId equals b.BrandId
+                                 join co in context.Colors
+                                 on c.ColorId equals co.ColorId
+                                 join ca in context.Cars on b.BrandId equals ca.BrandId
+                                 join img in context.CarImages
+                                 on c.CarId equals img.CarId
+
+
+                                 select new CarImageDto { CarId = ca.CarId, BrandName = b.BrandName, ColorName = co.ColorName, DailyPrice = ca.DailyPrice, ModelYear = ca.ModelYear, Description = ca.Description, ImagePath = img.ImagePath };
+                return resultList.ToList();
+            }
+        }
+
+        public CarImageDto GetCarImageDto(Expression<Func<Car, bool>> filter = null)
+        {
+            using (ReCapProjectDBContext context = new ReCapProjectDBContext())
+            {
+                var resultList = from c in filter == null ? context.Cars : context.Cars.Where(filter)
+                                 join b in context.Brands
+                                 on c.BrandId equals b.BrandId
+                                 join co in context.Colors
+                                 on c.ColorId equals co.ColorId
+                                 join ca in context.Cars on b.BrandId equals ca.BrandId
+                                 join img in context.CarImages
+                                 on c.CarId equals img.CarId
+
+
+                                 select new CarImageDto { CarId = ca.CarId, BrandName = b.BrandName, ColorName = co.ColorName, DailyPrice = ca.DailyPrice, ModelYear = ca.ModelYear, Description = ca.Description, ImagePath = img.ImagePath };
+                return resultList.FirstOrDefault();
+            }
+        }
     }
 }

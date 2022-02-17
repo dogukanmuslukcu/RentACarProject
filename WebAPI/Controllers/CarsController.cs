@@ -152,5 +152,36 @@ namespace WebAPI.Controllers
             }
         }
 
+        [HttpGet("getcarimagedetails")]
+
+        public IActionResult GetCarImageDetails()
+        {
+            
+            var result = _carService.GetCarImageDetails();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+
+        [HttpGet("getbyidforimagedto")]
+        public IActionResult GetByIdForImageDto(int id)
+        {
+            var result = _carService.GetByIdForImageDto(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
     }
 }

@@ -99,8 +99,18 @@ namespace Business.Concrete
         public IDataResult<CarDetailsDto> GetByIdForDto(int carId)
         {
             
-                return new SuccessDataResult<CarDetailsDto>(_carDal.GetCarDto(c => c.CarId == carId), Messages.SuccessDataMessage);
+             return new SuccessDataResult<CarDetailsDto>(_carDal.GetCarDto(c => c.CarId == carId), Messages.SuccessDataMessage);
           
+        }
+
+        public IDataResult<CarImageDto> GetByIdForImageDto(int carId)
+        {
+            return new SuccessDataResult<CarImageDto>(_carDal.GetCarImageDto(c => c.CarId == carId), Messages.SuccessDataMessage);
+        }
+
+        public IDataResult<List<CarImageDto>> GetCarImageDetails()
+        {
+            return new SuccessDataResult<List<CarImageDto>>(_carDal.GetCarImageDetails(), Messages.SuccessDataMessage);
         }
     }
 }
