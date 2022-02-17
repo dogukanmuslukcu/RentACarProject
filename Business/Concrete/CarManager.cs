@@ -103,9 +103,9 @@ namespace Business.Concrete
           
         }
 
-        public IDataResult<CarImageDto> GetByIdForImageDto(int carId)
+        public IDataResult<List<CarImageDto>> GetByIdForImageDto(int carId)
         {
-            return new SuccessDataResult<CarImageDto>(_carDal.GetCarImageDto(c => c.CarId == carId), Messages.SuccessDataMessage);
+            return new SuccessDataResult<List<CarImageDto>>(_carDal.GetCarImageDto(c => c.CarId == carId), Messages.SuccessDataMessage);
         }
 
         public IDataResult<List<CarImageDto>> GetCarImageDetails()
