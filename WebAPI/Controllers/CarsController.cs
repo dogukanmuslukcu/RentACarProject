@@ -109,10 +109,10 @@ namespace WebAPI.Controllers
                 return BadRequest(result);
             }
         }
-        [HttpGet("getallcolorid")]
-        public IActionResult GetAllColorId(int colorId)
+        [HttpGet("getcardetailbycolorid")]
+        public IActionResult GetCarDetailByColorId(int colorId)
         {
-            var result = _carService.GetAllColorId(colorId);
+            var result = _carService.GetCarDetailByColorId(colorId);
             if (result.Success)
             {
                 return Ok(result);
@@ -123,10 +123,10 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("getallbrandid")]
-        public IActionResult GetAllBrandId(int brandId)
+        [HttpGet("getcardetailbybrandid")]
+        public IActionResult GetCarDetailByBrandId(int brandId)
         {
-            var result = _carService.GetAllBrandId(brandId);
+            var result = _carService.GetCarDetailByBrandId(brandId);
             if (result.Success)
             {
                 return Ok(result);
@@ -138,10 +138,24 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("getbyidfordto")]
-        public IActionResult GetByIdForDto(int id)
+        [HttpGet("getcardetailbyid")]
+        public IActionResult GetCarDetailById(int id)
         {
-            var result = _carService.GetByIdForDto(id);
+            var result = _carService.GetCarDetailById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+        [HttpGet("getcardetailbycolorandbrandid")]
+        public IActionResult GetCarDetailByColorAndBrandId(int colorId,int brandId)
+        {
+            var result = _carService.GetCarDetailByColorAndBrandId(colorId,brandId);
             if (result.Success)
             {
                 return Ok(result);
@@ -169,10 +183,10 @@ namespace WebAPI.Controllers
         }
 
 
-        [HttpGet("getbyidforimagedto")]
+        [HttpGet("getcarimagedetailbyid")]
         public IActionResult GetByIdForImageDto(int id)
         {
-            var result = _carService.GetByIdForImageDto(id);
+            var result = _carService.GetCarImageDetailById(id);
             if (result.Success)
             {
                 return Ok(result);
