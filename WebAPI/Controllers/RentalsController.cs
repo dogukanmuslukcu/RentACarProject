@@ -96,9 +96,9 @@ namespace WebAPI.Controllers
             }
         }
 
-        [HttpGet("getrentaldetails")]
+        [HttpGet("getRentaldetails")]
 
-        public IActionResult GetCarDetails()
+        public IActionResult GetRentalDetails()
         {
             
             var result = _rentalService.GetRentalDetails();

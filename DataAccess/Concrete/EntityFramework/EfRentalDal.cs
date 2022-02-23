@@ -12,19 +12,22 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfRentalDal : IEfEntityRepositoryBase<Rental, ReCapProjectDBContext>, IRentalDal
     {
-        public List<RentalDetailsDto> GetRentalDetails(Expression<Func<Rental, bool>> filter = null)
+        public List<RentalDetailsDto> GetRentalDetails(Expression<Func<RentalDetailsDto, bool>> filter = null)
         {
             using (ReCapProjectDBContext context = new ReCapProjectDBContext())
             {
-                var resultList = from c in filter == null ? context.Rentals : context.Rentals.Where(filter)
-                                 join r in context.Rentals on c.CarId equals r.CarId
-                                 join cu in context.Customers on r.CustomerId equals cu.CustomerId
-                                 join ca in context.Cars on r.CarId equals ca.CarId
-                                 join b in context.Brands on ca.BrandId equals b.BrandId
+                var resultList = from rental in context.Rentals
+                             join customer in context.Customers
+                                 on rental.CustomerId equals customer.CustomerId
+                             join car in context.Cars
+                                 on rental.CarId equals car.CarId
+                             join brand in context.Brands
+                                 on car.BrandId equals brand.BrandId
 
-                                 select new RentalDetailsDto { RentId = r.RentId, BrandName = b.BrandName, CustomerName = cu.FirstName + " " + cu.LastName, RentDate = r.RentDate, ReturnDate = r.ReturnDate };
+                             select new RentalDetailsDto { RentId = rental.RentId, BrandName = brand.BrandName, CustomerName = customer.FirstName + " " + customer.LastName, RentDate = rental.RentDate, ReturnDate = rental.ReturnDate };
 
-                return resultList.ToList();
+                return filter == null ? resultList.ToList() : resultList.Where(filter).ToList();
+
 
             }
         }

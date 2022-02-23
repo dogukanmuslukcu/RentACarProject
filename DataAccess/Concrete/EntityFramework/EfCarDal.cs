@@ -24,8 +24,11 @@ namespace DataAccess.Concrete.EntityFramework
                                  on c.BrandId equals b.BrandId
                                  join co in context.Colors
                                  on c.ColorId equals co.ColorId
+                                 
                         
-                                 select new CarDetailsDto { CarId = c.CarId, BrandName = b.BrandName, ColorName = co.ColorName, DailyPrice = c.DailyPrice, ModelYear = c.ModelYear, Description = c.Description};
+                                 select new CarDetailsDto { CarId = c.CarId, BrandName = b.BrandName, ColorName = co.ColorName, DailyPrice = c.DailyPrice, ModelYear = c.ModelYear, Description = c.Description,
+                                 IsCarRentable  = !context.Rentals.Any(r => r.CarId == c.CarId) || !context.Rentals.Any(r => r.CarId == c.CarId && (r.ReturnDate == null || (r.ReturnDate.HasValue && r.ReturnDate > DateTime.Now)))
+                                 };
 
                 return resultList.ToList();
 
