@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusniessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -25,7 +26,7 @@ namespace Business.Concrete
         }
 
 
-     
+        [SecuredOperation("Product.List")]
         public IResult Add(Rental rental)
         {
             _rentalDal.Add(rental);
