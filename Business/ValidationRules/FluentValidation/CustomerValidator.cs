@@ -9,15 +9,8 @@ namespace Business.ValidationRules.FluentValidation
    public class CustomerValidator : AbstractValidator<Customer>
     {
         public CustomerValidator()
-        {
-            RuleFor(ct => ct.Email).NotEmpty();
-            RuleFor(ct => ct.FirstName).NotEmpty();
-            RuleFor(ct => ct.LastName).NotEmpty();
+        { 
             RuleFor(ct => ct.CompanyName).NotEmpty();
-            RuleFor(ct => ct.Password).NotEmpty();
-            RuleFor(ct => ct.Password.Length).GreaterThanOrEqualTo(8);
-            RuleFor(ct => ct.Email).Must(ContainSpecificEmailCharacter).WithMessage("email adresi @ içermelidir.");
-            RuleFor(ct => ct.Password).Must(ContainSpecificCharacters).WithMessage("şifreniz en az bir rakam veyahut ( ? & @ # ) dan birini içermelidir.");
         }
 
         private bool ContainSpecificCharacters(string arg)

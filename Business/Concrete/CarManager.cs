@@ -49,7 +49,7 @@ namespace Business.Concrete
 
         }
         
-        [ValidationAspect(typeof(CarValidator))]
+       // [ValidationAspect(typeof(CarValidator))]
         [CacheRemoveAspect("IProduct.Service.Get")]
         public IResult Update(Car car)
         {

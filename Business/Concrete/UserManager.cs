@@ -10,6 +10,7 @@ using Core.Utilities.Abstract;
 using Core.Utilities.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,16 +55,25 @@ namespace Business.Concrete
         {
             return _userDal.Get(m => m.Email == email);
         }
-
+        
         public List<OperationClaim> GetClaims(User user)
         {
             return _userDal.GetClaims(user);
         }
 
-        [ValidationAspect(typeof(UserValidator))]
-        public IResult Update(User user)
+        public IDataResult<List<UserForGetDto>> GetUserDTO(string email)
         {
-            _userDal.Update(user);
+            return new SuccessDataResult<List<UserForGetDto>>(_userDal.GetUserDTO(m=>m.Email==email), Messages.SuccessDataMessage);
+        }
+
+       //[ValidationAspect(typeof(UserValidator))]
+        public IResult Update(UserForGetDto user)
+        {
+            var userUpdate = _userDal.Get(u => u.UserId == user.UserId);
+            userUpdate.FirstName = user.FirstName;
+            userUpdate.LastName = user.LastName;
+            userUpdate.Email = user.Email;
+            _userDal.Update(userUpdate);
              return new SuccessResult(Messages.SuccessMessage);
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Core.Entities.Concrete;
 using Entities.Concrete;
+using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -54,7 +55,7 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(User user)
+        public IActionResult Update(UserForGetDto user)
         {
             var result = _userService.Update(user);
             if (result.Success)
@@ -85,6 +86,20 @@ namespace WebAPI.Controllers
         public IActionResult GetById(int id)
         {
             var result = _userService.GetByID(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return BadRequest(result);
+            }
+        }
+
+        [HttpGet("getuserbymail")]
+        public IActionResult GetByMail(string email)
+        {
+            var result = _userService.GetUserDTO(email);
             if (result.Success)
             {
                 return Ok(result);
